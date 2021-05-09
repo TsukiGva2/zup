@@ -1,4 +1,16 @@
 ARG.Usage usage = NEW("Usage: %0% [flags] name")
+ARG.Bool newproject = NEW("n", "new", FALSE, "create a new project")
+ARG.Bool delete = NEW("D", "delete", FALSE, "delete a project's folder")
+
+PROC dieOnErr(status stat, string msg, bool fatal = TRUE)
+  IF stat.Equal(FAIL)
+    IF fatal
+      LOG.fatal(msg)
+    ELSE
+      LOG.error(msg)
+    }
+  }
+}
 
 FUNC Main() int
   list<string> args = ARG.getRawList()
@@ -6,7 +18,32 @@ FUNC Main() int
     IO.print(usage.get())
     RETURN 1
   }
-  string filename = args[-1]
-  IO.print(filename)
+
+  string projectname = args[-1]
+  
+  IF newproject.get()
+    dieOnErr(IO.mkdir(projectname), "error creating directory")
+    dieOnErr(IO.chdir(projectname), "error entering directory")
+
+    IO.File gitignore = IO.fileWriter(".gitignore", TRUE) # truncate = true
+    dieOnErr(gitignore.writeAllLines(["ZUDIR/", "bin/", "*.exe"]), "error writing gitignore", FALSE)
+    gitignore.close()
+  ELSEIF delete.get()
+    IO.print("are you sure you want to delete " .. projectname .. "?\n")
+    IF IO.readChar().asString().toLower() == "y"
+      IO.print("entering project folder...")
+      dieOnErr(IO.chdir(projectname), "error entering project's directory")
+      FOR file IN IO.dirList(".")
+        dieOnErr(IO.delete(file), "couldn't delete file " .. file)
+      }
+      dieOnErr(IO.chdir(".."), "error leaving project's directory, but it's files are already gone")
+      dieOnErr(IO.rmdir(projectname), "error deleting directory")
+      IO.print("done")
+    ELSE
+      IO.print("ok! be careful next time\n")
+      RETURN 0
+    }
+  }
+
   RETURN 0
 }
