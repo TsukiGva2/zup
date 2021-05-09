@@ -1,0 +1,12 @@
+ARG.Usage usage = NEW("Usage: %0% [flags] name")
+
+FUNC Main() int
+  list<string> args = ARG.getRawList()
+  IF args.size() <= 1
+    IO.print(usage.get())
+    RETURN 1
+  }
+  string filename = args[-1]
+  IO.print(filename)
+  RETURN 0
+}
