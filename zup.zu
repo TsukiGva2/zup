@@ -12,6 +12,19 @@ PROC dieOnErr(status stat, string msg, bool fatal = TRUE)
   }
 }
 
+PROC delDir(string name)
+  FOR file IN IO.dirList(name)
+    file = name .. "/" .. file
+    IF IO.isDirectory(file)
+      delDir(file) # recursively delete directories
+      #dieOnErr(IO.rmdir(file), "couldn't delete dir", FALSE)
+    ELSE
+      dieOnErr(IO.delete(file), "couldn't delete file " .. file, FALSE)
+    }
+  }
+  dieOnErr(IO.rmdir(name), "error deleting dir")
+}
+
 FUNC Main() int
   list<string> args = ARG.getRawList()
   IF args.size() <= 1
@@ -22,27 +35,40 @@ FUNC Main() int
   string projectname = args[-1]
   
   IF newproject.get()
-    dieOnErr(IO.mkdir(projectname), "error creating directory")
-    dieOnErr(IO.chdir(projectname), "error entering directory")
+    
+    dieOnErr(IO.mkdir(projectname), "error creating project dir")
+    dieOnErr(IO.chdir(projectname), "error entering project dir")
 
     IO.File gitignore = IO.fileWriter(".gitignore", TRUE) # truncate = true
-    dieOnErr(gitignore.writeAllLines(["ZUDIR/", "bin/", "*.exe"]), "error writing gitignore", FALSE)
+    dieOnErr(gitignore.writeAllLines(["ZUDIR/", "bin/", "*.exe", ""]), "error writing gitignore", FALSE)
+    dieOnErr(gitignore.flush(), "error flushing .gitignore", FALSE)
     gitignore.close()
+
+    dieOnErr(IO.mkdir("src"), "error creating source dir")
+    dieOnErr(IO.chdir("src"), "error entering source dir")
+
+    IO.File mainfile = IO.fileWriter("main.zu", TRUE)
+    dieOnErr(mainfile.writeAllLines(["FUNC main() int", "\tRETURN 0", "}", ""]), "error writing main.zu", FALSE)
+    dieOnErr(mainfile.flush(), "error flushing src/main.zu")
+    mainfile.close()
+    
+    dieOnErr(IO.mkdir("bin"), "error creating bin dir")
+
   ELSEIF delete.get()
+    
     IO.print("are you sure you want to delete " .. projectname .. "?\n")
     IF IO.readChar().asString().toLower() == "y"
-      IO.print("entering project folder...")
-      dieOnErr(IO.chdir(projectname), "error entering project's directory")
-      FOR file IN IO.dirList(".")
-        dieOnErr(IO.delete(file), "couldn't delete file " .. file)
+      IF IO.isDirectory(projectname)
+        delDir(projectname)
+        IO.print("done")
+      ELSE
+        LOG.fatal(projectname .. " is not a directory")
       }
-      dieOnErr(IO.chdir(".."), "error leaving project's directory, but it's files are already gone")
-      dieOnErr(IO.rmdir(projectname), "error deleting directory")
-      IO.print("done")
     ELSE
       IO.print("ok! be careful next time\n")
       RETURN 0
     }
+
   }
 
   RETURN 0
