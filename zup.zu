@@ -3,6 +3,7 @@ ARG.String newproject = NEW("n", "new", NIL, "create a new project")
 ARG.Bool run          = NEW("r", "run", FALSE, "compile and run a project")
 ARG.String delete     = NEW("D", "delete", NIL, "delete a project's folder")
 ARG.Int  maxdepth     = NEW("p", "depth", 2, "max number of directories to search for a makefile, defaults to 2")
+ARG.Bool compile      = NEW("c", "compile", FALSE, "compile a project")
 
 PROC dieOnErr(status stat, string msg, bool fatal = TRUE)
   IF stat.Equal(FAIL)
@@ -41,20 +42,56 @@ PROC findMakefile(int depth, int curr = 0)
   }
 }
 
+PROC compileProject()
+    findMakefile(maxdepth.get())
+    SYS.Process process = NEW("make")
+      .writeTo("buildlog")
+      .writeErrorsToOut(TRUE)
+      .start()
+
+    process.wait()
+    IF process.didExitNormally()
+      IF process.getExitValue() != 0
+        LOG.fatal("couldn't compile program, check buildlog for more information")
+      }
+    ELSE
+      LOG.fatal("process didn't exit normally, check buildlog for more information")
+    }
+    delDir("src/ZUDIR")
+}
+
 FUNC Main() int
   IF newproject.get() != NIL
   
     string projectname = newproject.get()
 
+    list<string> readmeText = [
+        "# " .. projectname,
+        "",
+        "<!--- project's description -->",
+        ""]
+
     list<string> makefileText = [
+        "# example makefile, it's not a good one, sorry.",
         "ZU=zimbu",
+        "CC=gcc",
+        "#CC=clang",
+        "CFLAGS=",
         "ZUFLAGS=",
+        "",
         "all:",
-        "\t$(ZU) $(ZUFLAGS) src/main.zu -o bin/" .. projectname,
+        "\tmkdir -p target/bin/",
+        "\t$(ZU) $(ZUFLAGS) src/main.zu -o target/bin/" .. projectname,
+        "\tcp src/ZUDIR/main.c target/c/",
+        "",
+        "c:",
+        "\tmkdir -p target/bin/",
+        "\t$(CC) $(CFLAGS) target/c/main.c -o target/bin/" .. projectname,
         ""]
 
     list<string> hwText = [
         "FUNC Main() int",
+        "  # zimbu hates tabs for some reason",
         "  IO.print(\"hello, world!\")",
         "  RETURN 0",
         "}",
@@ -62,7 +99,7 @@ FUNC Main() int
 
     list<string> gitignoreText = [
         "ZUDIR/",
-        "bin/",
+        "target/bin/",
         "buildlog",
         ""]
 
@@ -83,12 +120,19 @@ FUNC Main() int
     mainfile.close()
     
     dieOnErr(IO.chdir(".."), "error leaving source dir")
-    dieOnErr(IO.mkdir("bin"), "error creating bin dir")
+    dieOnErr(IO.mkdir("target"), "error creating target dir")
+    dieOnErr(IO.mkdir("target/bin"), "error creating bin dir")
+    dieOnErr(IO.mkdir("target/c"), "error creating c files dir")
 
     IO.File makefile = IO.fileWriter("Makefile", TRUE)
     dieOnErr(makefile.writeAllLines(makefileText), FALSE)
     dieOnErr(makefile.flush(), "error flushing Makefile")
     makefile.close()
+    
+    IO.File readme = IO.fileWriter("README.md", TRUE)
+    dieOnErr(readme.writeAllLines(readmeText), "error writing README.md", FALSE)
+    dieOnErr(readme.flush(), "error flushing README.md")
+    readme.close()
 
   ELSEIF delete.get() != NIL
     
@@ -108,24 +152,14 @@ FUNC Main() int
     }
   
   ELSEIF run.get()
-    findMakefile(maxdepth.get())
-    SYS.Process process = NEW("make")
-      .writeTo("buildlog")
-      .writeErrorsToOut(TRUE)
-      .start()
 
-    process.wait()
-    IF process.didExitNormally()
-      IF process.getExitValue() != 0
-        LOG.fatal("couldn't compile program, check buildlog for more information")
-      }
-    ELSE
-      LOG.fatal("process didn't exit normally, check buildlog for more information")
-    }
+    compileProject()
+    SYS.shell("target/bin/" .. IO.tail(IO.getdir())) # XXX: the good ol' system()
 
-    delDir("src/ZUDIR")
+  ELSEIF compile.get()
 
-    SYS.shell("bin/" .. IO.tail(IO.getdir())) # XXX: the good ol' system()
+    compileProject()
+
   }
 
   RETURN 0
