@@ -638,9 +638,6 @@ typedef struct {
  char text[38];
 } Zs38;
 typedef struct {
- char text[25];
-} Zs25;
-typedef struct {
  char text[26];
 } Zs26;
 typedef struct {
@@ -1052,6 +1049,14 @@ Zs10 YLu4 = {"\010buildlog\000"};
 Zs63 YlRr = {"\075couldn't compile program, check buildlog for more information\000"};
 Zs67 Y6nW = {"\101process didn't exit normally, check buildlog for more information\000"};
 Zs11 Ypo4 = {"\011src/ZUDIR\000"};
+void Y1eS(Tc *Aname, Tc *Adisplay_name); /* mkncd */
+Zs17 YQcP = {"\017error creating \000"};
+Zs17 Y1iM = {"\017error entering \000"};
+void Y7ir(Tc *Aparent, Tl *Achildren); /* mkSubDirs */
+Zs6 YSE7 = {"\004 dir\000"};
+void YLOM(Tc *Aname, Tb Atruncate, Tl *Alines); /* writeLinesToFile */
+Zs16 Yx_V = {"\016error writing \000"};
+Zs17 YUM5 = {"\017error flushing \000"};
 Zs4 YN2 = {"\002# \000"};
 Zs33 YBvw = {"\037<!--- project's description -->\000"};
 Zs49 YmYt = {"\057# example makefile, it's not a good one, sorry.\000"};
@@ -1072,28 +1077,15 @@ Zs29 Y64B = {"\033  IO.print(\"hello, world!\")\000"};
 Zs12 Yc_G = {"\012  RETURN 0\000"};
 Zs8 Yn0d = {"\006ZUDIR/\000"};
 Zs13 YDfk = {"\013target/bin/\000"};
-Zs28 YsYg = {"\032error creating project dir\000"};
-Zs28 YwmT = {"\032error entering project dir\000"};
+Zs13 YbUX = {"\013project dir\000"};
 Zs12 YEE1 = {"\012.gitignore\000"};
-Zs25 YwV5 = {"\027error writing gitignore\000"};
-Zs27 YGxV = {"\031error flushing .gitignore\000"};
 Zs5 YnET = {"\003src\000"};
-Zs27 YN4W = {"\031error creating source dir\000"};
-Zs27 Y9Zz = {"\031error entering source dir\000"};
+Zs12 YzwM = {"\012source dir\000"};
 Zs9 YjBi = {"\007main.zu\000"};
-Zs23 YRTq = {"\025error writing main.zu\000"};
-Zs28 YRh1 = {"\032error flushing src/main.zu\000"};
 Zs26 YkGo = {"\030error leaving source dir\000"};
 Zs8 YEXX = {"\006target\000"};
-Zs27 Y0KB = {"\031error creating target dir\000"};
-Zs12 Yubo = {"\012target/bin\000"};
-Zs24 YtwZ = {"\026error creating bin dir\000"};
-Zs10 YIvW = {"\010target/c\000"};
-Zs28 YW9N = {"\032error creating c files dir\000"};
-Zs25 YLjU = {"\027error flushing Makefile\000"};
+Zs5 YtJb = {"\003bin\000"};
 Zs11 YRFY = {"\011README.md\000"};
-Zs25 Yblf = {"\027error writing README.md\000"};
-Zs26 YDvd = {"\030error flushing README.md\000"};
 Zs34 YDd3 = {"\040are you sure you want to delete \000"};
 Zs4 YkLa = {"\002?\n\000"};
 Zs3 Y5a = {"\001y\000"};
@@ -2527,7 +2519,7 @@ Tcpos ZcTbl84899[]={
 };
 Tc Y9QD[]="Main()";
 Tcpos ZcTbl5270[]={
-{64,3},
+{84,3},
 {2,37},
 {8,11},
 {26,11},
@@ -2535,44 +2527,28 @@ Tcpos ZcTbl5270[]={
 {40,11},
 {42,5},
 {43,5},
-{45,28},
+{45,5},
 {46,5},
-{47,5},
 {48,5},
-{50,5},
+{49,5},
 {51,5},
-{53,27},
-{54,5},
-{55,5},
-{56,5},
+{52,5},
+{54,23},
+{56,33},
 {58,5},
 {59,5},
-{60,5},
-{61,5},
-{63,27},
-{64,5},
-{65,5},
-{66,5},
-{68,25},
-{69,5},
-{70,5},
-{71,5},
-{73,23},
-{75,33},
-{77,5},
+{60,7},
+{61,9},
+{62,9},
+{64,9},
+{67,7},
+{68,14},
+{71,14},
+{73,5},
+{74,5},
+{76,18},
 {78,5},
-{79,7},
-{80,9},
-{81,9},
-{83,9},
-{86,7},
-{87,14},
-{90,14},
-{92,5},
-{93,5},
-{95,18},
-{97,5},
-{101,10},
+{82,10},
 };
 Tc YWKB[]="SYS.Process.NEW()";
 Tcpos ZcTbl78949[]={
@@ -2743,6 +2719,25 @@ Tcpos ZcTbl33712[]={
 {4,7},
 {6,7},
 };
+Tc YOu6[]="mkSubDirs()";
+Tcpos ZcTbl85653[]={
+{69,3},
+{2,3},
+{3,5},
+{2,3},
+};
+Tc YjdY[]="mkncd()";
+Tcpos ZcTbl37206[]={
+{64,5},
+{1,5},
+};
+Tc Yuo5[]="writeLinesToFile()";
+Tcpos ZcTbl30814[]={
+{77,18},
+{1,3},
+{2,3},
+{3,3},
+};
 Tcode ZcodeTable[]={
 {0,YiCF,Yaa,ZcTbl0},
 {412,Y6mX,YxLq,ZcTbl412},
@@ -2776,6 +2771,7 @@ Tcode ZcodeTable[]={
 {29560,Ye5D,YzK9,ZcTbl29560},
 {29585,Y6mX,YAVe,ZcTbl29585},
 {29660,Ye5D,YEvo,ZcTbl29660},
+{30814,YiCF,Yuo5,ZcTbl30814},
 {31079,Ye5D,Y6Ad,ZcTbl31079},
 {32086,Y6mX,Y1As,ZcTbl32086},
 {32939,YTAg,Y0DO,ZcTbl32939},
@@ -2786,6 +2782,7 @@ Tcode ZcodeTable[]={
 {35635,Y6mX,Yt8G,ZcTbl35635},
 {36159,Y6mX,Y_4w,ZcTbl36159},
 {36491,Y6mX,YYT9,ZcTbl36491},
+{37206,YiCF,YjdY,ZcTbl37206},
 {38493,YiCF,YpGR,ZcTbl38493},
 {38911,Ye5D,YM2k,ZcTbl38911},
 {38926,YDDW,Yo15,ZcTbl38926},
@@ -2856,6 +2853,7 @@ Tcode ZcodeTable[]={
 {84899,YQAh,Y8w5,ZcTbl84899},
 {85000,Y6mX,Ycb9,ZcTbl85000},
 {85295,Ye5D,Yza4,ZcTbl85295},
+{85653,YiCF,YOu6,ZcTbl85653},
 {86206,Ye5D,YZNA,ZcTbl86206},
 {86818,Y6mX,YlgI,ZcTbl86818},
 {87235,Y6mX,YR5m,ZcTbl87235},
@@ -3170,10 +3168,6 @@ Ti ZstringGetChar(Tc *sv, Ti idx) {
  if (i >= len) ZthrowCstringOutOfRange(idx, "index too big");
  r = ZfromChar(p + i);
  return r;
-}
-
-Tc *Zbool2string(Tb n) {
- return Zstr(n == 0 ? "FALSE" : "TRUE");
 }
 
 Ti Zutf8size(Tc *sp, Ti len) {
@@ -9645,6 +9639,63 @@ void YL1s() {
  topFrame = sf.prev;
  return;
 }
+void Y1eS(Tc *Aname, Tc *Adisplay_name) {
+ Zsf sf;
+ Tc *t0 = NULL;
+ sf.prev = topFrame;
+ sf.pos = 0;
+ topFrame = &sf;
+ sf.pos=3720600;
+ Y8sq(YC2N(Aname), (t0 = ZcS(((Tc*)&YQcP), Adisplay_name)), 1);
+ sf.pos=3720601;
+ Y8sq(YHmO(Aname), (t0 = ZcS(((Tc*)&Y1iM), Adisplay_name)), 1);
+ topFrame = sf.prev;
+ return;
+}
+void Y7ir(Tc *Aparent, Tl *Achildren) {
+ Zsf sf;
+ Tl *Zf1 = NULL;
+ Tc *Vsub = NULL;
+ Tc *t0 = NULL;
+ sf.prev = topFrame;
+ sf.pos = 0;
+ topFrame = &sf;
+ sf.pos=8565300;
+ Y8sq(YC2N(Aparent), (t0 = ZcS3(((Tc*)&YQcP), Aparent, ((Tc*)&YSE7))), 1);
+ sf.pos=8565301;
+ {
+  Tfl Zf1i;
+  Zf1 = Achildren;
+  Zf1i.l = Zf1;
+  Zf1i.valp = (void*)&Vsub;
+  Zf1i.i = 0;
+  for (; ZforListPtrCont(&Zf1i); ) {
+  sf.pos=8565302;
+  Y8sq(YC2N(ZcS3(Aparent, ((Tc*)&YV), Vsub)), (t0 = ZcS3(((Tc*)&YQcP), Vsub, ((Tc*)&YSE7))), 1);
+  sf.pos=8565303;
+  }
+ }
+ topFrame = sf.prev;
+ return;
+}
+void YLOM(Tc *Aname, Tb Atruncate, Tl *Alines) {
+ Zsf sf;
+ Tr Vf = {NULL};
+ Tc *t0 = NULL;
+ sf.prev = topFrame;
+ sf.pos = 0;
+ topFrame = &sf;
+ sf.pos=3081400;
+ Vf = YiBk(Aname, Atruncate);
+ sf.pos=3081401;
+ Y8sq(((Ts (*)(void*, Tl*))(Vf.table[33]))(Vf.ptr, Alines), (t0 = ZcS(((Tc*)&Yx_V), Aname)), 0);
+ sf.pos=3081402;
+ Y8sq(((Ts (*)(void*))(Vf.table[34]))(Vf.ptr), (t0 = ZcS(((Tc*)&YUM5), Aname)), 1);
+ sf.pos=3081403;
+ ((Ts (*)(void*))(Vf.table[35]))(Vf.ptr);
+ topFrame = sf.prev;
+ return;
+}
 /*
  * INIT IMT
  */
@@ -10013,11 +10064,8 @@ int Fmain(void) {
  Tl *VmakefileText = NULL;
  Tl *VhwText = NULL;
  Tl *VgitignoreText = NULL;
- Tr Vgitignore = {NULL};
- Tr Vmainfile = {NULL};
- Tr Vmakefile = {NULL};
- Tr Vreadme = {NULL};
  Tc *Vprojectname1 = NULL;
+ Tl *t0 = NULL;
  int rt = 0;
  sf.prev = topFrame;
  sf.pos = 0;
@@ -10037,84 +10085,52 @@ int Fmain(void) {
   sf.pos=527005;
   VgitignoreText = ZnewList((Tt*)&string__T, 4); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&Yn0d)); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&YDfk)); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&YLu4)); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&Ya));
   sf.pos=527006;
-  Y8sq(YC2N(Vprojectname), ((Tc*)&YsYg), 1);
+  Y1eS(Vprojectname, ((Tc*)&YbUX));
   sf.pos=527007;
-  Y8sq(YHmO(Vprojectname), ((Tc*)&YwmT), 1);
+  YLOM(((Tc*)&YEE1), 1, VgitignoreText);
   sf.pos=527008;
-  Vgitignore = YiBk(((Tc*)&YEE1), 1);
+  Y1eS(((Tc*)&YnET), ((Tc*)&YzwM));
   sf.pos=527009;
-  Y8sq(((Ts (*)(void*, Tl*))(Vgitignore.table[33]))(Vgitignore.ptr, VgitignoreText), ((Tc*)&YwV5), 0);
+  YLOM(((Tc*)&YjBi), 1, VhwText);
   sf.pos=527010;
-  Y8sq(((Ts (*)(void*))(Vgitignore.table[34]))(Vgitignore.ptr), ((Tc*)&YGxV), 0);
-  sf.pos=527011;
-  ((Ts (*)(void*))(Vgitignore.table[35]))(Vgitignore.ptr);
-  sf.pos=527012;
-  Y8sq(YC2N(((Tc*)&YnET)), ((Tc*)&YN4W), 1);
-  sf.pos=527013;
-  Y8sq(YHmO(((Tc*)&YnET)), ((Tc*)&Y9Zz), 1);
-  sf.pos=527014;
-  Vmainfile = YiBk(((Tc*)&YjBi), 1);
-  sf.pos=527015;
-  Y8sq(((Ts (*)(void*, Tl*))(Vmainfile.table[33]))(Vmainfile.ptr, VhwText), ((Tc*)&YRTq), 0);
-  sf.pos=527016;
-  Y8sq(((Ts (*)(void*))(Vmainfile.table[34]))(Vmainfile.ptr), ((Tc*)&YRh1), 1);
-  sf.pos=527017;
-  ((Ts (*)(void*))(Vmainfile.table[35]))(Vmainfile.ptr);
-  sf.pos=527018;
   Y8sq(YHmO(((Tc*)&YEka)), ((Tc*)&YkGo), 1);
-  sf.pos=527019;
-  Y8sq(YC2N(((Tc*)&YEXX)), ((Tc*)&Y0KB), 1);
-  sf.pos=527020;
-  Y8sq(YC2N(((Tc*)&Yubo)), ((Tc*)&YtwZ), 1);
-  sf.pos=527021;
-  Y8sq(YC2N(((Tc*)&YIvW)), ((Tc*)&YW9N), 1);
-  sf.pos=527022;
-  Vmakefile = YiBk(((Tc*)&Yw6s), 1);
-  sf.pos=527023;
-  Y8sq(((Ts (*)(void*, Tl*))(Vmakefile.table[33]))(Vmakefile.ptr, VmakefileText), Zbool2string(0), 1);
-  sf.pos=527024;
-  Y8sq(((Ts (*)(void*))(Vmakefile.table[34]))(Vmakefile.ptr), ((Tc*)&YLjU), 1);
-  sf.pos=527025;
-  ((Ts (*)(void*))(Vmakefile.table[35]))(Vmakefile.ptr);
-  sf.pos=527026;
-  Vreadme = YiBk(((Tc*)&YRFY), 1);
-  sf.pos=527027;
-  Y8sq(((Ts (*)(void*, Tl*))(Vreadme.table[33]))(Vreadme.ptr, VreadmeText), ((Tc*)&Yblf), 0);
-  sf.pos=527028;
-  Y8sq(((Ts (*)(void*))(Vreadme.table[34]))(Vreadme.ptr), ((Tc*)&YDvd), 1);
-  sf.pos=527029;
-  ((Ts (*)(void*))(Vreadme.table[35]))(Vreadme.ptr);
+  sf.pos=527011;
+  Y7ir(((Tc*)&YEXX), (t0 = ZnewList((Tt*)&string__T, 2), ZLap((Tl*)t0, (Tz)(void*)((Tc*)&YtJb)), ZLap((Tl*)t0, (Tz)(void*)((Tc*)&YKa))));
+  sf.pos=527012;
+  YLOM(((Tc*)&Yw6s), 1, VmakefileText);
+  sf.pos=527013;
+  YLOM(((Tc*)&YRFY), 1, VreadmeText);
  }
  else {
- sf.pos=527030;
+ sf.pos=527014;
  if ((YPoi(Vdelete) != NULL))
  {
-  sf.pos=527031;
+  sf.pos=527015;
   Vprojectname1 = YPoi(Vdelete);
-  sf.pos=527032;
+  sf.pos=527016;
   Yl0k(ZcS3(((Tc*)&YDd3), Vprojectname1, ((Tc*)&YkLa)));
-  sf.pos=527033;
+  sf.pos=527017;
   if ((ZstringCmp(ZstringToLower(ZintAsString(Yk7S())), ((Tc*)&Y5a)) == 0))
   {
-   sf.pos=527034;
+   sf.pos=527018;
    if (YpPE(Vprojectname1))
    {
-    sf.pos=527035;
+    sf.pos=527019;
     YYEs(Vprojectname1);
-    sf.pos=527036;
+    sf.pos=527020;
     Yl0k(((Tc*)&YJYL));
    }
    else
    {
-    sf.pos=527037;
+    sf.pos=527021;
     YFf6(ZcS(Vprojectname1, ((Tc*)&YPes)), NULL, 0);
    }
   }
   else
   {
-   sf.pos=527038;
+   sf.pos=527022;
    Yl0k(((Tc*)&YbrJ));
-   sf.pos=527039;
+   sf.pos=527023;
    r = 0;
    rt = 1;
    goto YMe3;
@@ -10123,23 +10139,23 @@ YMe3:
   if (rt) goto YvK3;
  }
  else {
- sf.pos=527040;
+ sf.pos=527024;
  if (YHoR(Vrun))
  {
-  sf.pos=527041;
+  sf.pos=527025;
   YL1s();
-  sf.pos=527042;
+  sf.pos=527026;
   YMso(ZcS(((Tc*)&YDfk), YKFh(YXsa())));
  }
  else {
- sf.pos=527043;
+ sf.pos=527027;
  if (YHoR(Vcompile))
  {
-  sf.pos=527044;
+  sf.pos=527028;
   YL1s();
  }
  }}}
- sf.pos=527045;
+ sf.pos=527029;
  r = 0;
 YvK3:
  topFrame = sf.prev;
