@@ -1,14 +1,13 @@
 ZU=zimbu
 CC=gcc
+MKDIR_P=mkdir -p
 
 all:
-	$(CC) -o zup build/zup.c
-	mkdir -p bin/
-	mv zup bin/
+	${MKDIR_P} bin/
+	$(CC) -o bin/zup build/zup.c
 
 # compiling with zimbu, this only works if you have zimbu in your $PATH
 zu:
-	$(ZU) zup.zu
+	${MKDIR_P} bin/
+	$(ZU) zup.zu -o bin/zup
 	-cp ZUDIR/*.c build/
-	mkdir -p bin/
-	mv zup bin/
