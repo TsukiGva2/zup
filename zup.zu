@@ -2,7 +2,7 @@ ARG.Usage usage       = NEW("Usage: %0% [flags]")
 ARG.String newproject = NEW("n", "new", NIL, "create a new project")
 ARG.Bool run          = NEW("r", "run", FALSE, "compile and run a project")
 ARG.String delete     = NEW("D", "delete", NIL, "delete a project's folder")
-ARG.Int  maxdepth     = NEW("p", "depth", 2, "max number of directories to search for a makefile, defaults to 2")
+ARG.Int  maxdepth     = NEW("p", "depth", 2, "max number of directories to recursively search for a makefile, defaults to 2")
 ARG.Bool compile      = NEW("c", "compile", FALSE, "compile a project")
 
 PROC dieOnErr(status stat, string msg, bool fatal = TRUE)
