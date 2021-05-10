@@ -1046,9 +1046,11 @@ Zs64 Ywng = {"\076, if your makefile is even further, try running with --depth X
 void YL1s(); /* compileProject */
 Zs6 YTbh = {"\004make\000"};
 Zs10 YLu4 = {"\010buildlog\000"};
+Zs11 Yxp9 = {"\011<--ERR-->\000"};
 Zs63 YlRr = {"\075couldn't compile program, check buildlog for more information\000"};
 Zs67 Y6nW = {"\101process didn't exit normally, check buildlog for more information\000"};
 Zs11 Ypo4 = {"\011src/ZUDIR\000"};
+Zs10 YmRA = {"\010<--OK-->\000"};
 void Y1eS(Tc *Aname, Tc *Adisplay_name); /* mkncd */
 Zs17 YQcP = {"\017error creating \000"};
 Zs17 Y1iM = {"\017error entering \000"};
@@ -2519,7 +2521,7 @@ Tcpos ZcTbl84899[]={
 };
 Tc Y9QD[]="Main()";
 Tcpos ZcTbl5270[]={
-{84,3},
+{87,3},
 {2,37},
 {8,11},
 {26,11},
@@ -2691,8 +2693,11 @@ Tcpos ZcTbl20541[]={
 {7,5},
 {8,7},
 {9,9},
-{12,7},
-{14,5},
+{10,9},
+{13,7},
+{14,7},
+{16,5},
+{17,5},
 };
 Tc YIoS[]="delDir()";
 Tcpos ZcTbl90777[]={
@@ -2721,19 +2726,19 @@ Tcpos ZcTbl33712[]={
 };
 Tc YOu6[]="mkSubDirs()";
 Tcpos ZcTbl85653[]={
-{69,3},
+{72,3},
 {2,3},
 {3,5},
 {2,3},
 };
 Tc YjdY[]="mkncd()";
 Tcpos ZcTbl37206[]={
-{64,5},
+{67,5},
 {1,5},
 };
 Tc Yuo5[]="writeLinesToFile()";
 Tcpos ZcTbl30814[]={
-{77,18},
+{80,18},
 {1,3},
 {2,3},
 {3,3},
@@ -9610,6 +9615,7 @@ void YYy2(Ti Adepth, Ti Acurr) {
 void YL1s() {
  Zsf sf;
  YDTf *Vprocess = 0;
+ Tl *t0 = NULL;
  sf.prev = topFrame;
  sf.pos = 0;
  topFrame = &sf;
@@ -9626,16 +9632,22 @@ void YL1s() {
   if ((Ylep(Vprocess) != 0))
   {
    sf.pos=2054105;
+   YLOM(((Tc*)&YLu4), 0, (t0 = ZnewList((Tt*)&string__T, 2), ZLap((Tl*)t0, (Tz)(void*)((Tc*)&Yxp9)), ZLap((Tl*)t0, (Tz)(void*)((Tc*)&Ya))));
+   sf.pos=2054106;
    YFf6(((Tc*)&YlRr), NULL, 0);
   }
  }
  else
  {
-  sf.pos=2054106;
+  sf.pos=2054107;
+  YLOM(((Tc*)&YLu4), 0, (t0 = ZnewList((Tt*)&string__T, 2), ZLap((Tl*)t0, (Tz)(void*)((Tc*)&Yxp9)), ZLap((Tl*)t0, (Tz)(void*)((Tc*)&Ya))));
+  sf.pos=2054108;
   YFf6(((Tc*)&Y6nW), NULL, 0);
  }
- sf.pos=2054107;
+ sf.pos=2054109;
  YYEs(((Tc*)&Ypo4));
+ sf.pos=2054110;
+ YLOM(((Tc*)&YLu4), 0, (t0 = ZnewList((Tt*)&string__T, 2), ZLap((Tl*)t0, (Tz)(void*)((Tc*)&YmRA)), ZLap((Tl*)t0, (Tz)(void*)((Tc*)&Ya))));
  topFrame = sf.prev;
  return;
 }
