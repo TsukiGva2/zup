@@ -60,6 +60,26 @@ PROC compileProject()
     delDir("src/ZUDIR")
 }
 
+PROC mkncd(string name, string display_name)
+    dieOnErr(IO.mkdir(name), "error creating " .. display_name)
+    dieOnErr(IO.chdir(name), "error entering " .. display_name)
+}
+
+PROC mkSubDirs(string parent, list<string> children)
+  dieOnErr(IO.mkdir(parent), "error creating " .. parent .. " dir")
+
+  FOR sub IN children
+    dieOnErr(IO.mkdir(parent .. "/" .. sub), "error creating " .. sub .. " dir")
+  }
+}
+
+PROC writeLinesToFile(string name, bool truncate, list<string> lines)
+  IO.File f = IO.fileWriter(name, truncate)
+  dieOnErr(f.writeAllLines(lines), "error writing " .. name, FALSE)
+  dieOnErr(f.flush(), "error flushing " .. name)
+  f.close()
+}
+
 FUNC Main() int
   IF newproject.get() != NIL
   
@@ -103,36 +123,17 @@ FUNC Main() int
         "buildlog",
         ""]
 
-    dieOnErr(IO.mkdir(projectname), "error creating project dir")
-    dieOnErr(IO.chdir(projectname), "error entering project dir")
+    mkncd(projectname, "project dir") # MaKe aNd ChDir
+    writeLinesToFile(".gitignore", TRUE, gitignoreText)
 
-    IO.File gitignore = IO.fileWriter(".gitignore", TRUE) # truncate = true
-    dieOnErr(gitignore.writeAllLines(gitignoreText), "error writing gitignore", FALSE)
-    dieOnErr(gitignore.flush(), "error flushing .gitignore", FALSE)
-    gitignore.close()
+    mkncd("src", "source dir")
+    writeLinesToFile("main.zu", TRUE, hwText)
 
-    dieOnErr(IO.mkdir("src"), "error creating source dir")
-    dieOnErr(IO.chdir("src"), "error entering source dir")
-
-    IO.File mainfile = IO.fileWriter("main.zu", TRUE)
-    dieOnErr(mainfile.writeAllLines(hwText), "error writing main.zu", FALSE)
-    dieOnErr(mainfile.flush(), "error flushing src/main.zu")
-    mainfile.close()
-    
     dieOnErr(IO.chdir(".."), "error leaving source dir")
-    dieOnErr(IO.mkdir("target"), "error creating target dir")
-    dieOnErr(IO.mkdir("target/bin"), "error creating bin dir")
-    dieOnErr(IO.mkdir("target/c"), "error creating c files dir")
+    mkSubDirs("target", ["bin", "c"])
 
-    IO.File makefile = IO.fileWriter("Makefile", TRUE)
-    dieOnErr(makefile.writeAllLines(makefileText), FALSE)
-    dieOnErr(makefile.flush(), "error flushing Makefile")
-    makefile.close()
-    
-    IO.File readme = IO.fileWriter("README.md", TRUE)
-    dieOnErr(readme.writeAllLines(readmeText), "error writing README.md", FALSE)
-    dieOnErr(readme.flush(), "error flushing README.md")
-    readme.close()
+    writeLinesToFile("Makefile", TRUE, makefileText)
+    writeLinesToFile("README.md", TRUE, readmeText)
 
   ELSEIF delete.get() != NIL
     
