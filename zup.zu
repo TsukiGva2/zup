@@ -95,7 +95,7 @@ FUNC Main() int
         ""]
 
     list<string> makefileText = [
-        "# example makefile, it's not a good one, sorry.",
+        "# example makefile, it's not a good one though",
         "ZU=zimbu",
         "CC=gcc",
         "#CC=clang",

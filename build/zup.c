@@ -629,11 +629,14 @@ typedef struct {
  char text[33];
 } Zs33;
 typedef struct {
- char text[49];
-} Zs49;
+ char text[48];
+} Zs48;
 typedef struct {
  char text[46];
 } Zs46;
+typedef struct {
+ char text[49];
+} Zs49;
 typedef struct {
  char text[38];
 } Zs38;
@@ -1061,7 +1064,7 @@ Zs16 Yx_V = {"\016error writing \000"};
 Zs17 YUM5 = {"\017error flushing \000"};
 Zs4 YN2 = {"\002# \000"};
 Zs33 YBvw = {"\037<!--- project's description -->\000"};
-Zs49 YmYt = {"\057# example makefile, it's not a good one, sorry.\000"};
+Zs48 YNJR = {"\056# example makefile, it's not a good one though\000"};
 Zs10 YIv_ = {"\010ZU=zimbu\000"};
 Zs8 YdRa = {"\006CC=gcc\000"};
 Zs11 YzGt = {"\011#CC=clang\000"};
@@ -10091,7 +10094,7 @@ int Fmain(void) {
   sf.pos=527002;
   VreadmeText = ZnewList((Tt*)&string__T, 4); ZLap((Tl*)VreadmeText, (Tz)(void*)ZcS(((Tc*)&YN2), Vprojectname)); ZLap((Tl*)VreadmeText, (Tz)(void*)((Tc*)&Ya)); ZLap((Tl*)VreadmeText, (Tz)(void*)((Tc*)&YBvw)); ZLap((Tl*)VreadmeText, (Tz)(void*)((Tc*)&Ya));
   sf.pos=527003;
-  VmakefileText = ZnewList((Tt*)&string__T, 16); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YmYt)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YIv_)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YdRa)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YzGt)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YjY5)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YTYB)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Ya)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Y7qh)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YH88)); ZLap((Tl*)VmakefileText, (Tz)(void*)ZcS(((Tc*)&YIC0), Vprojectname)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YTUl)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Ya)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YOGb)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YH88)); ZLap((Tl*)VmakefileText, (Tz)(void*)ZcS(((Tc*)&Ye1I), Vprojectname)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Ya));
+  VmakefileText = ZnewList((Tt*)&string__T, 16); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YNJR)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YIv_)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YdRa)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YzGt)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YjY5)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YTYB)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Ya)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Y7qh)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YH88)); ZLap((Tl*)VmakefileText, (Tz)(void*)ZcS(((Tc*)&YIC0), Vprojectname)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YTUl)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Ya)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YOGb)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YH88)); ZLap((Tl*)VmakefileText, (Tz)(void*)ZcS(((Tc*)&Ye1I), Vprojectname)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Ya));
   sf.pos=527004;
   VhwText = ZnewList((Tt*)&string__T, 6); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&YGsu)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Yxm9)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Y64B)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Yc_G)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Y9a)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Ya));
   sf.pos=527005;
