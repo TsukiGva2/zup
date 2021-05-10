@@ -1008,15 +1008,15 @@ Zs3 YVa = {"\001n\000"};
 Zs5 YftG = {"\003new\000"};
 Zs22 YWod = {"\024create a new project\000"};
 YzqH *Vnewproject = 0;
-Zs3 YKa = {"\001c\000"};
-Zs9 YrSH = {"\007compile\000"};
-Zs19 Y4aZ = {"\021compile a project\000"};
-Y86c *Vcompile = 0;
+Zs3 YZa = {"\001r\000"};
+Zs5 Yr9Q = {"\003run\000"};
+Zs27 Yh1P = {"\031compile and run a project\000"};
+Y86c *Vrun = 0;
 Zs3 Yfa = {"\001D\000"};
 Zs8 Y1WO = {"\006delete\000"};
 Zs27 YpZ0 = {"\031delete a project's folder\000"};
 YzqH *Vdelete = 0;
-Zs3 YZa = {"\001r\000"};
+Zs3 YXa = {"\001p\000"};
 Zs7 YZtg = {"\005depth\000"};
 Zs67 YqvS = {"\101max number of directories to search for a makefile, defaults to 2\000"};
 YJQu *Vmaxdepth = 0;
@@ -2524,7 +2524,7 @@ Tcpos ZcTbl5270[]={
 {58,9},
 {61,7},
 {62,14},
-{65,18},
+{65,14},
 {66,5},
 {70,8},
 {72,5},
@@ -9819,11 +9819,11 @@ int ZglobInit(int round) {
    sf.pos=1;
    Vnewproject = YBtk(NULL, ((Tc*)&YVa), ((Tc*)&YftG), NULL, ((Tc*)&YWod));
    sf.pos=2;
-   Vcompile = YttT(NULL, ((Tc*)&YKa), ((Tc*)&YrSH), 0, ((Tc*)&Y4aZ));
+   Vrun = YttT(NULL, ((Tc*)&YZa), ((Tc*)&Yr9Q), 0, ((Tc*)&Yh1P));
    sf.pos=3;
    Vdelete = YBtk(NULL, ((Tc*)&Yfa), ((Tc*)&Y1WO), NULL, ((Tc*)&YpZ0));
    sf.pos=4;
-   Vmaxdepth = Y4qx(NULL, ((Tc*)&YZa), ((Tc*)&YZtg), 2, ((Tc*)&YqvS));
+   Vmaxdepth = Y4qx(NULL, ((Tc*)&YXa), ((Tc*)&YZtg), 2, ((Tc*)&YqvS));
  }
  done &= JIOModule(round);
  done &= JLOGModule(round);
@@ -10025,7 +10025,7 @@ YMe3:
  }
  else {
  sf.pos=527033;
- if (YHoR(Vcompile))
+ if (YHoR(Vrun))
  {
   sf.pos=527034;
   YYy2(YRvz(Vmaxdepth), 0);
