@@ -1,4 +1,4 @@
-ARG.Usage usage       = NEW("Usage: %0% [flags]")
+ARG.Usage usage       = NEW("Usage: %0% option [projectname]")
 ARG.String newproject = NEW("n", "new", NIL, "create a new project")
 ARG.Bool run          = NEW("r", "run", FALSE, "compile and run a project")
 ARG.String delete     = NEW("D", "delete", NIL, "delete a project's folder")
@@ -84,6 +84,11 @@ PROC writeLinesToFile(string name, bool truncate, list<string> lines)
 }
 
 FUNC Main() int
+  IF ARG.rawSize() < 2
+    IO.print(usage.get())
+    EXIT 1
+  }
+
   IF newproject.get() != NIL
   
     string projectname = newproject.get()
@@ -126,7 +131,7 @@ FUNC Main() int
         "buildlog",
         ""]
 
-    mkncd(projectname, "project dir") # MaKe aNd ChDir
+    mkncd(projectname, "project dir") # Mkdir and chdir
     writeLinesToFile(".gitignore", TRUE, gitignoreText)
 
     mkncd("src", "source dir")

@@ -617,8 +617,11 @@ YkxB *Vpos;
 extern Tto Y_SI__T;
 /* ARGModule done */
 typedef struct {
- char text[67];
-} Zs67;
+ char text[33];
+} Zs33;
+typedef struct {
+ char text[79];
+} Zs79;
 typedef struct {
  char text[64];
 } Zs64;
@@ -626,8 +629,8 @@ typedef struct {
  char text[63];
 } Zs63;
 typedef struct {
- char text[33];
-} Zs33;
+ char text[67];
+} Zs67;
 typedef struct {
  char text[48];
 } Zs48;
@@ -928,6 +931,7 @@ Ti YMLU = 1 /* MARGModule.exitVal */;
 YuMQ *Yun4 = 0; /* MARGModule.theUsage */
 int Ytu___r = 0; /* MARGModule.Ready */
 Ts Ytu_(); /* MARGModule.Init */
+Ti Y2H3(); /* MARGModule.rawSize */
 To ToYnU5[1];
 Zs8 Yr32 = {"\006Status\000"};
 void YY8i(); /* MARGModule.initCheck */
@@ -1014,7 +1018,7 @@ To ToY_SI[8];
 Zs12 Ygf5 = {"\012StringList\000"};
 int JARGModule(int round);
 /* ARGModule done */
-Zs20 Ypu5 = {"\022Usage: %0% [flags]\000"};
+Zs33 Y8IH = {"\037Usage: %0% option [projectname]\000"};
 YuMQ *Vusage = 0;
 Zs3 YVa = {"\001n\000"};
 Zs5 YftG = {"\003new\000"};
@@ -1030,7 +1034,7 @@ Zs27 YpZ0 = {"\031delete a project's folder\000"};
 YzqH *Vdelete = 0;
 Zs3 YXa = {"\001p\000"};
 Zs7 YZtg = {"\005depth\000"};
-Zs67 YqvS = {"\101max number of directories to search for a makefile, defaults to 2\000"};
+Zs79 Yw3V = {"\115max number of directories to recursively search for a makefile, defaults to 2\000"};
 YJQu *Vmaxdepth = 0;
 Zs3 YKa = {"\001c\000"};
 Zs9 YrSH = {"\007compile\000"};
@@ -1300,13 +1304,13 @@ Tc *ZnewString(Tc *p, Ti len) {
  memmove(pp, p, len);
  return res;
 }
-Tc Ye5D[]="/home/tsuki/.zimbu/lib/ARGModule.zu";
-Tc Y6mX[]="/home/tsuki/.zimbu/lib/EModule.zu";
-Tc Yusm[]="/home/tsuki/.zimbu/lib/IOModule.zu";
-Tc YQAh[]="/home/tsuki/.zimbu/lib/LOGModule.zu";
-Tc YDDW[]="/home/tsuki/.zimbu/lib/SYSModule.zu";
-Tc YTAg[]="/home/tsuki/.zimbu/lib/TIMEModule.zu";
-Tc YHVP[]="/home/tsuki/.zimbu/lib/ZModule.zu";
+Tc YLBZ[]="/data/data/com.termux/files/home/zimbuw32/lib/ARGModule.zu";
+Tc YT4s[]="/data/data/com.termux/files/home/zimbuw32/lib/EModule.zu";
+Tc YVIj[]="/data/data/com.termux/files/home/zimbuw32/lib/IOModule.zu";
+Tc Y95k[]="/data/data/com.termux/files/home/zimbuw32/lib/LOGModule.zu";
+Tc Ym3G[]="/data/data/com.termux/files/home/zimbuw32/lib/SYSModule.zu";
+Tc Y6Lt[]="/data/data/com.termux/files/home/zimbuw32/lib/TIMEModule.zu";
+Tc YtDl[]="/data/data/com.termux/files/home/zimbuw32/lib/ZModule.zu";
 Tc YiCF[]="zup.zu";
 Tc Yaa[]="";
 Tcpos ZcTbl0[]={
@@ -1680,6 +1684,10 @@ Tcpos ZcTbl82534[]={
 {12,21},
 {15,19},
 {-144,7},
+};
+Tc Y8iP[]="ARG.rawSize()";
+Tcpos ZcTbl41830[]={
+{115,20},
 };
 Tc YMnk[]="ARG.writeLead()";
 Tcpos ZcTbl81798[]={
@@ -2525,35 +2533,38 @@ Tcpos ZcTbl84899[]={
 Tc Y9QD[]="Main()";
 Tcpos ZcTbl5270[]={
 {87,3},
-{2,37},
-{8,11},
-{26,11},
-{34,11},
-{40,11},
-{42,5},
-{43,5},
-{45,5},
-{46,5},
+{1,5},
+{2,10},
+{5,3},
+{7,37},
+{13,11},
+{31,11},
+{39,11},
+{45,11},
+{47,5},
 {48,5},
-{49,5},
+{50,5},
 {51,5},
-{52,5},
-{54,23},
-{56,33},
-{58,5},
-{59,5},
-{60,7},
-{61,9},
-{62,9},
-{64,9},
-{67,7},
-{68,14},
-{71,14},
-{73,5},
-{74,5},
-{76,18},
+{53,5},
+{54,5},
+{56,5},
+{57,5},
+{59,23},
+{61,33},
+{63,5},
+{64,5},
+{65,7},
+{66,9},
+{67,9},
+{69,9},
+{72,7},
+{73,14},
+{76,14},
 {78,5},
-{82,10},
+{79,5},
+{81,18},
+{83,5},
+{87,10},
 };
 Tc YWKB[]="SYS.Process.NEW()";
 Tcpos ZcTbl78949[]={
@@ -2748,133 +2759,134 @@ Tcpos ZcTbl30814[]={
 };
 Tcode ZcodeTable[]={
 {0,YiCF,Yaa,ZcTbl0},
-{412,Y6mX,YxLq,ZcTbl412},
-{1320,Ye5D,YImu,ZcTbl1320},
-{1872,Yusm,YNFk,ZcTbl1872},
-{3273,Ye5D,Y_VO,ZcTbl3273},
-{4839,Ye5D,YGq4,ZcTbl4839},
+{412,YT4s,YxLq,ZcTbl412},
+{1320,YLBZ,YImu,ZcTbl1320},
+{1872,YVIj,YNFk,ZcTbl1872},
+{3273,YLBZ,Y_VO,ZcTbl3273},
+{4839,YLBZ,YGq4,ZcTbl4839},
 {5270,YiCF,Y9QD,ZcTbl5270},
-{5342,YTAg,YQE_,ZcTbl5342},
-{6308,Y6mX,YR5_,ZcTbl6308},
-{7452,Yusm,Ys1a,ZcTbl7452},
-{9948,Y6mX,YALK,ZcTbl9948},
-{10613,Y6mX,YCbo,ZcTbl10613},
-{11136,YDDW,Y28g,ZcTbl11136},
-{11217,Y6mX,YoZS,ZcTbl11217},
-{14715,Y6mX,Y4SL,ZcTbl14715},
-{14832,Yusm,Y9tP,ZcTbl14832},
-{15718,Y6mX,YEFs,ZcTbl15718},
-{15755,Yusm,YEgn,ZcTbl15755},
-{16053,Yusm,Y5P_,ZcTbl16053},
-{16350,Ye5D,Ygzb,ZcTbl16350},
-{18187,YHVP,Ym1t,ZcTbl18187},
-{20149,Y6mX,YFbI,ZcTbl20149},
+{5342,Y6Lt,YQE_,ZcTbl5342},
+{6308,YT4s,YR5_,ZcTbl6308},
+{7452,YVIj,Ys1a,ZcTbl7452},
+{9948,YT4s,YALK,ZcTbl9948},
+{10613,YT4s,YCbo,ZcTbl10613},
+{11136,Ym3G,Y28g,ZcTbl11136},
+{11217,YT4s,YoZS,ZcTbl11217},
+{14715,YT4s,Y4SL,ZcTbl14715},
+{14832,YVIj,Y9tP,ZcTbl14832},
+{15718,YT4s,YEFs,ZcTbl15718},
+{15755,YVIj,YEgn,ZcTbl15755},
+{16053,YVIj,Y5P_,ZcTbl16053},
+{16350,YLBZ,Ygzb,ZcTbl16350},
+{18187,YtDl,Ym1t,ZcTbl18187},
+{20149,YT4s,YFbI,ZcTbl20149},
 {20541,YiCF,YSLv,ZcTbl20541},
-{21418,Y6mX,YtpQ,ZcTbl21418},
-{24916,Y6mX,Y9iJ,ZcTbl24916},
-{25434,Y6mX,YoIJ,ZcTbl25434},
-{25958,Y6mX,Y4vu,ZcTbl25958},
-{26657,Yusm,YGjj,ZcTbl26657},
-{26760,Yusm,YYk7,ZcTbl26760},
-{29560,Ye5D,YzK9,ZcTbl29560},
-{29585,Y6mX,YAVe,ZcTbl29585},
-{29660,Ye5D,YEvo,ZcTbl29660},
+{21418,YT4s,YtpQ,ZcTbl21418},
+{24916,YT4s,Y9iJ,ZcTbl24916},
+{25434,YT4s,YoIJ,ZcTbl25434},
+{25958,YT4s,Y4vu,ZcTbl25958},
+{26657,YVIj,YGjj,ZcTbl26657},
+{26760,YVIj,YYk7,ZcTbl26760},
+{29560,YLBZ,YzK9,ZcTbl29560},
+{29585,YT4s,YAVe,ZcTbl29585},
+{29660,YLBZ,YEvo,ZcTbl29660},
 {30814,YiCF,Yuo5,ZcTbl30814},
-{31079,Ye5D,Y6Ad,ZcTbl31079},
-{32086,Y6mX,Y1As,ZcTbl32086},
-{32939,YTAg,Y0DO,ZcTbl32939},
+{31079,YLBZ,Y6Ad,ZcTbl31079},
+{32086,YT4s,Y1As,ZcTbl32086},
+{32939,Y6Lt,Y0DO,ZcTbl32939},
 {33712,YiCF,YWPn,ZcTbl33712},
-{34556,YDDW,YwRI,ZcTbl34556},
-{34818,YTAg,YHWY,ZcTbl34818},
-{35088,Y6mX,YcIS,ZcTbl35088},
-{35635,Y6mX,Yt8G,ZcTbl35635},
-{36159,Y6mX,Y_4w,ZcTbl36159},
-{36491,Y6mX,YYT9,ZcTbl36491},
+{34556,Ym3G,YwRI,ZcTbl34556},
+{34818,Y6Lt,YHWY,ZcTbl34818},
+{35088,YT4s,YcIS,ZcTbl35088},
+{35635,YT4s,Yt8G,ZcTbl35635},
+{36159,YT4s,Y_4w,ZcTbl36159},
+{36491,YT4s,YYT9,ZcTbl36491},
 {37206,YiCF,YjdY,ZcTbl37206},
 {38493,YiCF,YpGR,ZcTbl38493},
-{38911,Ye5D,YM2k,ZcTbl38911},
-{38926,YDDW,Yo15,ZcTbl38926},
-{40405,YDDW,YTx9,ZcTbl40405},
-{42983,Y6mX,Y9aV,ZcTbl42983},
-{43000,Ye5D,YEFE,ZcTbl43000},
-{43124,Y6mX,Ygil,ZcTbl43124},
-{44130,Y6mX,YG80,ZcTbl44130},
-{44849,Yusm,YABb,ZcTbl44849},
-{45202,YDDW,Y6pE,ZcTbl45202},
-{45209,Y6mX,Y2NH,ZcTbl45209},
-{45289,Y6mX,Y7gV,ZcTbl45289},
-{46171,Y6mX,Y9VX,ZcTbl46171},
-{46631,Yusm,YHCY,ZcTbl46631},
-{46761,Yusm,YN2v,ZcTbl46761},
-{48162,Yusm,YGx4,ZcTbl48162},
-{48164,Yusm,Y7lC,ZcTbl48164},
-{48299,Y6mX,Y9Cv,ZcTbl48299},
-{49183,Y6mX,YgcH,ZcTbl49183},
-{50841,YTAg,YLwM,ZcTbl50841},
-{52386,Y6mX,YgcM,ZcTbl52386},
-{52608,Y6mX,YqK0,ZcTbl52608},
-{52648,Ye5D,YF9k,ZcTbl52648},
-{53325,Y6mX,YlJi,ZcTbl53325},
-{53377,Y6mX,Yp81,ZcTbl53377},
-{54331,Y6mX,YLzZ,ZcTbl54331},
-{54540,YDDW,Yvgr,ZcTbl54540},
-{56372,Y6mX,Y4u_,ZcTbl56372},
-{56381,Y6mX,Y99g,ZcTbl56381},
-{56555,YQAh,YFIR,ZcTbl56555},
-{59277,YDDW,YZy1,ZcTbl59277},
-{59819,Yusm,YGQL,ZcTbl59819},
-{60567,Yusm,YskO,ZcTbl60567},
-{60593,Y6mX,Y5LR,ZcTbl60593},
-{61284,Ye5D,Y2cg,ZcTbl61284},
-{62213,Yusm,YU58,ZcTbl62213},
-{62809,Y6mX,Ylj3,ZcTbl62809},
-{63578,Y6mX,Yuz_,ZcTbl63578},
-{64128,Y6mX,YPKp,ZcTbl64128},
-{64478,Ye5D,YRbs,ZcTbl64478},
-{64531,Yusm,YrJP,ZcTbl64531},
-{65137,Yusm,Y2st,ZcTbl65137},
-{66188,Yusm,YJ7z,ZcTbl66188},
-{66501,Ye5D,YPPv,ZcTbl66501},
-{67514,Ye5D,YLhM,ZcTbl67514},
-{69694,Yusm,YXDJ,ZcTbl69694},
-{71563,Yusm,YZKb,ZcTbl71563},
-{72007,Yusm,YzQB,ZcTbl72007},
-{72650,Yusm,YrcS,ZcTbl72650},
-{73150,Yusm,YSjn,ZcTbl73150},
-{73471,Y6mX,Y_Qs,ZcTbl73471},
-{73580,Y6mX,YF6S,ZcTbl73580},
-{75697,Ye5D,YgDO,ZcTbl75697},
-{75905,Yusm,Y_7a,ZcTbl75905},
-{76644,Ye5D,YImf,ZcTbl76644},
-{78082,Y6mX,YbzA,ZcTbl78082},
-{78949,YDDW,YWKB,ZcTbl78949},
-{80636,Ye5D,YAAq,ZcTbl80636},
-{80644,Y6mX,YobA,ZcTbl80644},
-{81580,Yusm,Y5X7,ZcTbl81580},
-{81798,Ye5D,YMnk,ZcTbl81798},
-{82533,Ye5D,Yh2v,ZcTbl82533},
-{82534,Ye5D,Yh2v,ZcTbl82534},
-{82618,Yusm,Yxlj,ZcTbl82618},
-{83031,Y6mX,YpMw,ZcTbl83031},
-{83326,YQAh,YVvh,ZcTbl83326},
-{84870,Yusm,Y_pS,ZcTbl84870},
-{84899,YQAh,Y8w5,ZcTbl84899},
-{85000,Y6mX,Ycb9,ZcTbl85000},
-{85295,Ye5D,Yza4,ZcTbl85295},
+{38911,YLBZ,YM2k,ZcTbl38911},
+{38926,Ym3G,Yo15,ZcTbl38926},
+{40405,Ym3G,YTx9,ZcTbl40405},
+{41830,YLBZ,Y8iP,ZcTbl41830},
+{42983,YT4s,Y9aV,ZcTbl42983},
+{43000,YLBZ,YEFE,ZcTbl43000},
+{43124,YT4s,Ygil,ZcTbl43124},
+{44130,YT4s,YG80,ZcTbl44130},
+{44849,YVIj,YABb,ZcTbl44849},
+{45202,Ym3G,Y6pE,ZcTbl45202},
+{45209,YT4s,Y2NH,ZcTbl45209},
+{45289,YT4s,Y7gV,ZcTbl45289},
+{46171,YT4s,Y9VX,ZcTbl46171},
+{46631,YVIj,YHCY,ZcTbl46631},
+{46761,YVIj,YN2v,ZcTbl46761},
+{48162,YVIj,YGx4,ZcTbl48162},
+{48164,YVIj,Y7lC,ZcTbl48164},
+{48299,YT4s,Y9Cv,ZcTbl48299},
+{49183,YT4s,YgcH,ZcTbl49183},
+{50841,Y6Lt,YLwM,ZcTbl50841},
+{52386,YT4s,YgcM,ZcTbl52386},
+{52608,YT4s,YqK0,ZcTbl52608},
+{52648,YLBZ,YF9k,ZcTbl52648},
+{53325,YT4s,YlJi,ZcTbl53325},
+{53377,YT4s,Yp81,ZcTbl53377},
+{54331,YT4s,YLzZ,ZcTbl54331},
+{54540,Ym3G,Yvgr,ZcTbl54540},
+{56372,YT4s,Y4u_,ZcTbl56372},
+{56381,YT4s,Y99g,ZcTbl56381},
+{56555,Y95k,YFIR,ZcTbl56555},
+{59277,Ym3G,YZy1,ZcTbl59277},
+{59819,YVIj,YGQL,ZcTbl59819},
+{60567,YVIj,YskO,ZcTbl60567},
+{60593,YT4s,Y5LR,ZcTbl60593},
+{61284,YLBZ,Y2cg,ZcTbl61284},
+{62213,YVIj,YU58,ZcTbl62213},
+{62809,YT4s,Ylj3,ZcTbl62809},
+{63578,YT4s,Yuz_,ZcTbl63578},
+{64128,YT4s,YPKp,ZcTbl64128},
+{64478,YLBZ,YRbs,ZcTbl64478},
+{64531,YVIj,YrJP,ZcTbl64531},
+{65137,YVIj,Y2st,ZcTbl65137},
+{66188,YVIj,YJ7z,ZcTbl66188},
+{66501,YLBZ,YPPv,ZcTbl66501},
+{67514,YLBZ,YLhM,ZcTbl67514},
+{69694,YVIj,YXDJ,ZcTbl69694},
+{71563,YVIj,YZKb,ZcTbl71563},
+{72007,YVIj,YzQB,ZcTbl72007},
+{72650,YVIj,YrcS,ZcTbl72650},
+{73150,YVIj,YSjn,ZcTbl73150},
+{73471,YT4s,Y_Qs,ZcTbl73471},
+{73580,YT4s,YF6S,ZcTbl73580},
+{75697,YLBZ,YgDO,ZcTbl75697},
+{75905,YVIj,Y_7a,ZcTbl75905},
+{76644,YLBZ,YImf,ZcTbl76644},
+{78082,YT4s,YbzA,ZcTbl78082},
+{78949,Ym3G,YWKB,ZcTbl78949},
+{80636,YLBZ,YAAq,ZcTbl80636},
+{80644,YT4s,YobA,ZcTbl80644},
+{81580,YVIj,Y5X7,ZcTbl81580},
+{81798,YLBZ,YMnk,ZcTbl81798},
+{82533,YLBZ,Yh2v,ZcTbl82533},
+{82534,YLBZ,Yh2v,ZcTbl82534},
+{82618,YVIj,Yxlj,ZcTbl82618},
+{83031,YT4s,YpMw,ZcTbl83031},
+{83326,Y95k,YVvh,ZcTbl83326},
+{84870,YVIj,Y_pS,ZcTbl84870},
+{84899,Y95k,Y8w5,ZcTbl84899},
+{85000,YT4s,Ycb9,ZcTbl85000},
+{85295,YLBZ,Yza4,ZcTbl85295},
 {85653,YiCF,YOu6,ZcTbl85653},
-{86206,Ye5D,YZNA,ZcTbl86206},
-{86818,Y6mX,YlgI,ZcTbl86818},
-{87235,Y6mX,YR5m,ZcTbl87235},
-{89685,Y6mX,Y59h,ZcTbl89685},
-{89987,Yusm,YCbR,ZcTbl89987},
+{86206,YLBZ,YZNA,ZcTbl86206},
+{86818,YT4s,YlgI,ZcTbl86818},
+{87235,YT4s,YR5m,ZcTbl87235},
+{89685,YT4s,Y59h,ZcTbl89685},
+{89987,YVIj,YCbR,ZcTbl89987},
 {90777,YiCF,YIoS,ZcTbl90777},
-{90786,YDDW,Y0q_,ZcTbl90786},
-{91247,YTAg,Y0oq,ZcTbl91247},
-{92163,Y6mX,YTjU,ZcTbl92163},
-{94823,Yusm,Yj_J,ZcTbl94823},
-{96107,Y6mX,YMF2,ZcTbl96107},
-{97019,Y6mX,YgQK,ZcTbl97019},
-{99886,Y6mX,Y0Jk,ZcTbl99886},
+{90786,Ym3G,Y0q_,ZcTbl90786},
+{91247,Y6Lt,Y0oq,ZcTbl91247},
+{92163,YT4s,YTjU,ZcTbl92163},
+{94823,YVIj,Yj_J,ZcTbl94823},
+{96107,YT4s,YMF2,ZcTbl96107},
+{97019,YT4s,YgQK,ZcTbl97019},
+{99886,YT4s,Y0Jk,ZcTbl99886},
 };
 
 #ifdef SIGSEGV
@@ -8150,6 +8162,17 @@ Ts Ytu_() {
  topFrame = sf.prev;
  return r;
 }
+Ti Y2H3() {
+ Zsf sf;
+ Ti r = 0;
+ sf.prev = topFrame;
+ sf.pos = 0;
+ topFrame = &sf;
+ sf.pos=4183000;
+ r = ZListSize(Y1p3);
+ topFrame = sf.prev;
+ return r;
+}
 To ToYnU5[] = {
  {0, 0},
 };
@@ -9963,7 +9986,7 @@ int ZglobInit(int round) {
  topFrame = &sf;
  if (round == 1) {
    sf.pos=0;
-   Vusage = YOHU(NULL, ((Tc*)&Ypu5));
+   Vusage = YOHU(NULL, ((Tc*)&Y8IH));
    sf.pos=1;
    Vnewproject = YBtk(NULL, ((Tc*)&YVa), ((Tc*)&YftG), NULL, ((Tc*)&YWod));
    sf.pos=2;
@@ -9971,7 +9994,7 @@ int ZglobInit(int round) {
    sf.pos=3;
    Vdelete = YBtk(NULL, ((Tc*)&Yfa), ((Tc*)&Y1WO), NULL, ((Tc*)&YpZ0));
    sf.pos=4;
-   Vmaxdepth = Y4qx(NULL, ((Tc*)&YXa), ((Tc*)&YZtg), 2, ((Tc*)&YqvS));
+   Vmaxdepth = Y4qx(NULL, ((Tc*)&YXa), ((Tc*)&YZtg), 2, ((Tc*)&Yw3V));
    sf.pos=5;
    Vcompile = YttT(NULL, ((Tc*)&YKa), ((Tc*)&YrSH), 0, ((Tc*)&Y4aZ));
  }
@@ -10087,92 +10110,101 @@ int Fmain(void) {
  topFrame = &sf;
  r = 0;
  sf.pos=527000;
- if ((YPoi(Vnewproject) != NULL))
+ if ((Y2H3() < 2))
  {
   sf.pos=527001;
-  Vprojectname = YPoi(Vnewproject);
+  Yl0k(YAMW(Vusage));
   sf.pos=527002;
-  VreadmeText = ZnewList((Tt*)&string__T, 4); ZLap((Tl*)VreadmeText, (Tz)(void*)ZcS(((Tc*)&YN2), Vprojectname)); ZLap((Tl*)VreadmeText, (Tz)(void*)((Tc*)&Ya)); ZLap((Tl*)VreadmeText, (Tz)(void*)((Tc*)&YBvw)); ZLap((Tl*)VreadmeText, (Tz)(void*)((Tc*)&Ya));
-  sf.pos=527003;
-  VmakefileText = ZnewList((Tt*)&string__T, 16); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YNJR)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YIv_)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YdRa)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YzGt)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YjY5)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YTYB)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Ya)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Y7qh)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YH88)); ZLap((Tl*)VmakefileText, (Tz)(void*)ZcS(((Tc*)&YIC0), Vprojectname)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YTUl)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Ya)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YOGb)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YH88)); ZLap((Tl*)VmakefileText, (Tz)(void*)ZcS(((Tc*)&Ye1I), Vprojectname)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Ya));
+  Zexit(NULL, 1);
+  return 0;
+ }
+ sf.pos=527003;
+ if ((YPoi(Vnewproject) != NULL))
+ {
   sf.pos=527004;
-  VhwText = ZnewList((Tt*)&string__T, 6); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&YGsu)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Yxm9)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Y64B)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Yc_G)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Y9a)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Ya));
+  Vprojectname = YPoi(Vnewproject);
   sf.pos=527005;
-  VgitignoreText = ZnewList((Tt*)&string__T, 4); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&Yn0d)); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&YDfk)); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&YLu4)); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&Ya));
+  VreadmeText = ZnewList((Tt*)&string__T, 4); ZLap((Tl*)VreadmeText, (Tz)(void*)ZcS(((Tc*)&YN2), Vprojectname)); ZLap((Tl*)VreadmeText, (Tz)(void*)((Tc*)&Ya)); ZLap((Tl*)VreadmeText, (Tz)(void*)((Tc*)&YBvw)); ZLap((Tl*)VreadmeText, (Tz)(void*)((Tc*)&Ya));
   sf.pos=527006;
-  Y1eS(Vprojectname, ((Tc*)&YbUX));
+  VmakefileText = ZnewList((Tt*)&string__T, 16); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YNJR)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YIv_)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YdRa)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YzGt)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YjY5)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YTYB)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Ya)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Y7qh)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YH88)); ZLap((Tl*)VmakefileText, (Tz)(void*)ZcS(((Tc*)&YIC0), Vprojectname)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YTUl)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Ya)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YOGb)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YH88)); ZLap((Tl*)VmakefileText, (Tz)(void*)ZcS(((Tc*)&Ye1I), Vprojectname)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Ya));
   sf.pos=527007;
-  YLOM(((Tc*)&YEE1), 1, VgitignoreText);
+  VhwText = ZnewList((Tt*)&string__T, 6); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&YGsu)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Yxm9)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Y64B)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Yc_G)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Y9a)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Ya));
   sf.pos=527008;
-  Y1eS(((Tc*)&YnET), ((Tc*)&YzwM));
+  VgitignoreText = ZnewList((Tt*)&string__T, 4); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&Yn0d)); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&YDfk)); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&YLu4)); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&Ya));
   sf.pos=527009;
-  YLOM(((Tc*)&YjBi), 1, VhwText);
+  Y1eS(Vprojectname, ((Tc*)&YbUX));
   sf.pos=527010;
-  Y8sq(YHmO(((Tc*)&YEka)), ((Tc*)&YkGo), 1);
+  YLOM(((Tc*)&YEE1), 1, VgitignoreText);
   sf.pos=527011;
-  Y7ir(((Tc*)&YEXX), (t0 = ZnewList((Tt*)&string__T, 2), ZLap((Tl*)t0, (Tz)(void*)((Tc*)&YtJb)), ZLap((Tl*)t0, (Tz)(void*)((Tc*)&YKa))));
+  Y1eS(((Tc*)&YnET), ((Tc*)&YzwM));
   sf.pos=527012;
-  YLOM(((Tc*)&Yw6s), 1, VmakefileText);
+  YLOM(((Tc*)&YjBi), 1, VhwText);
   sf.pos=527013;
+  Y8sq(YHmO(((Tc*)&YEka)), ((Tc*)&YkGo), 1);
+  sf.pos=527014;
+  Y7ir(((Tc*)&YEXX), (t0 = ZnewList((Tt*)&string__T, 2), ZLap((Tl*)t0, (Tz)(void*)((Tc*)&YtJb)), ZLap((Tl*)t0, (Tz)(void*)((Tc*)&YKa))));
+  sf.pos=527015;
+  YLOM(((Tc*)&Yw6s), 1, VmakefileText);
+  sf.pos=527016;
   YLOM(((Tc*)&YRFY), 1, VreadmeText);
  }
  else {
- sf.pos=527014;
+ sf.pos=527017;
  if ((YPoi(Vdelete) != NULL))
  {
-  sf.pos=527015;
+  sf.pos=527018;
   Vprojectname1 = YPoi(Vdelete);
-  sf.pos=527016;
+  sf.pos=527019;
   Yl0k(ZcS3(((Tc*)&YDd3), Vprojectname1, ((Tc*)&YkLa)));
-  sf.pos=527017;
+  sf.pos=527020;
   if ((ZstringCmp(ZstringToLower(ZintAsString(Yk7S())), ((Tc*)&Y5a)) == 0))
   {
-   sf.pos=527018;
+   sf.pos=527021;
    if (YpPE(Vprojectname1))
    {
-    sf.pos=527019;
+    sf.pos=527022;
     YYEs(Vprojectname1);
-    sf.pos=527020;
+    sf.pos=527023;
     Yl0k(((Tc*)&YJYL));
    }
    else
    {
-    sf.pos=527021;
+    sf.pos=527024;
     YFf6(ZcS(Vprojectname1, ((Tc*)&YPes)), NULL, 0);
    }
   }
   else
   {
-   sf.pos=527022;
+   sf.pos=527025;
    Yl0k(((Tc*)&YbrJ));
-   sf.pos=527023;
+   sf.pos=527026;
    r = 0;
    rt = 1;
-   goto YMe3;
+   goto YQNK;
   }
-YMe3:
-  if (rt) goto YvK3;
- }
- else {
- sf.pos=527024;
- if (YHoR(Vrun))
- {
-  sf.pos=527025;
-  YL1s();
-  sf.pos=527026;
-  YMso(ZcS(((Tc*)&YDfk), YKFh(YXsa())));
+YQNK:
+  if (rt) goto YuK3;
  }
  else {
  sf.pos=527027;
- if (YHoR(Vcompile))
+ if (YHoR(Vrun))
  {
   sf.pos=527028;
   YL1s();
+  sf.pos=527029;
+  YMso(ZcS(((Tc*)&YDfk), YKFh(YXsa())));
+ }
+ else {
+ sf.pos=527030;
+ if (YHoR(Vcompile))
+ {
+  sf.pos=527031;
+  YL1s();
  }
  }}}
- sf.pos=527029;
+ sf.pos=527032;
  r = 0;
-YvK3:
+YuK3:
  topFrame = sf.prev;
  return r;
 }
