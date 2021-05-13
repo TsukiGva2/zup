@@ -1,0 +1,121 @@
+IMPORT.CHEADER "../lua/lua.h"
+IMPORT.CHEADER "../lua/lualib.h"
+IMPORT.CHEADER "../lua/lauxlib.h"
+IMPORT "Qk.zu"
+
+ARG.Usage usage       = NEW("Usage: %0% [flags]")
+ARG.String newproject = NEW("n", "new", NIL, "create a new project")
+ARG.Bool ismod        = NEW("m", "module", FALSE, "set this flag if project is a module")
+ARG.Bool run          = NEW("r", "run", FALSE, "compile and run a project")
+ARG.String delete     = NEW("D", "delete", NIL, "delete a project's folder")
+ARG.Int  maxdepth     = NEW("p", "depth", 2, "max number of directories to recursively search for a makefile, defaults to 2")
+ARG.Bool compile      = NEW("c", "compile", FALSE, "compile a project")
+ARG.Bool keeplogs     = NEW(NIL, "keep-logs", FALSE, "create a buildlog even if no errors occur")
+
+PROC runLua(string name)
+>>> uses(getCstring)
+  lua_State *L = luaL_newstate();
+  luaL_openlibs(L);
+
+  if (luaL_dofile(L,ZgetCstring(%name%)) == LUA_OK)
+  {
+    lua_pop(L, lua_gettop(L));
+  }
+  
+  lua_close(L);
+<<<
+}
+
+FUNC Main() int
+  IF newproject.get() != NIL
+  
+    string projectname = newproject.get()
+
+    list<string> readmeText = [
+        "# " .. projectname,
+        "",
+        "<!--- project's description -->",
+        ""]
+
+    list<string> makefileText = [
+        "# example makefile, it's not a good one though",
+        "ZU=zimbu",
+        "CC=gcc",
+        "#CC=clang",
+        "CFLAGS=",
+        "ZUFLAGS=",
+        "",
+        "all:",
+        "\tmkdir -p target/bin/",
+        "\t$(ZU) $(ZUFLAGS) src/main.zu -o target/bin/" .. projectname,
+        "\tcp src/ZUDIR/main.c target/c/",
+        "",
+        "c:",
+        "\tmkdir -p target/bin/",
+        "\t$(CC) $(CFLAGS) target/c/main.c -o target/bin/" .. projectname,
+        ""]
+
+    list<string> hwText = [
+        "FUNC Main() int",
+        "  # zimbu hates tabs for some reason",
+        "  IO.print(\"hello, world!\")",
+        "  RETURN 0",
+        "}",
+        ""]
+
+    list<string> gitignoreText = [
+        "ZUDIR/",
+        "target/bin/",
+        "buildlog",
+        ""]
+
+    list<string> zupconfText = [
+        "",
+        ""
+        ]
+
+    Qk.mkncd(projectname, "project dir") # make and chdir
+    Qk.writeLinesToFile(".gitignore", TRUE, gitignoreText)
+
+    Qk.mkncd("src", "source dir")
+    Qk.writeLinesToFile((ismod.get() ? projectname .. ".zu" : "main.zu"), TRUE, hwText)
+
+    IF !ismod.get()
+      Qk.dieOnErr(IO.chdir(".."), "error leaving source dir")
+      Qk.mkSubDirs("target", ["bin", "c"])
+
+      Qk.writeLinesToFile("Makefile", TRUE, makefileText)
+    }
+
+    Qk.writeLinesToFile("README.md", TRUE, readmeText)
+
+  ELSEIF delete.get() != NIL
+    
+    string projectname = delete.get()
+    
+    IO.print("are you sure you want to delete " .. projectname .. "?\n")
+    IF IO.readChar().asString().toLower() == "y"
+      IF IO.isDirectory(projectname)
+        Qk.delDir(projectname)
+        IO.print("done")
+      ELSE
+        LOG.fatal(projectname .. " is not a directory")
+      }
+    ELSE
+      IO.print("ok! be careful next time\n")
+      RETURN 0
+    }
+  
+  ELSEIF run.get()
+
+    Qk.compileProject(maxdepth, keeplogs)
+    SYS.shell("target/bin/" .. IO.tail(IO.getdir())) # XXX: the good ol' system()
+
+  ELSEIF compile.get()
+
+    Qk.compileProject(maxdepth, keeplogs)
+
+  }
+
+  RETURN 0
+}

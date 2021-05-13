@@ -1,0 +1,93 @@
+MODULE Qk @items=public
+  PROC dieOnErr(status stat, string msg, bool fatal = TRUE)
+    IF stat.Equal(FAIL)
+      IF fatal
+        LOG.fatal(msg)
+      ELSE
+        LOG.error(msg)
+      }
+    }
+  }
+
+  PROC delDir(string name)
+    FOR file IN IO.dirList(name)
+      file = name .. "/" .. file
+      IF IO.isDirectory(file)
+        delDir(file) # recursively delete directories
+        #dieOnErr(IO.rmdir(file), "couldn't delete dir", FALSE)
+      ELSE
+        dieOnErr(IO.delete(file), "couldn't delete file " .. file, FALSE)
+      }
+    }
+    dieOnErr(IO.rmdir(name), "error deleting dir")
+  }
+
+  # Added methods
+  PROC findMakefile(int depth, int curr = 0)
+    IF !IO.isReadable("Makefile") # recursively descend into dirtree searching for a makefile
+                                  # yes, i really like recursion
+      IF curr <= depth
+        dieOnErr(IO.chdir(".."), "couldn't descend directory")
+        findMakefile(depth, curr + 1)
+      ELSE
+        LOG.fatal(
+            "no Makefile found in directory tree (up to " .. depth .. " directories behind)" ..
+            ", if your makefile is even further, try running with --depth X")
+      }
+    }
+  }
+
+  PROC compileProject(ARG.Int maxdepth, ARG.Bool keeplogs)
+    findMakefile(maxdepth.get())
+    SYS.Process process = NEW("make")
+      .writeTo("buildlog")
+      .writeErrorsToOut(TRUE)
+      .start()
+
+    process.wait()
+    IF process.didExitNormally()
+      IF process.getExitValue() != 0
+        writeLinesToFile("buildlog", FALSE, ["<--ERR-->", ""])
+        LOG.fatal("couldn't compile program, check buildlog for more information")
+      }
+    ELSE
+      writeLinesToFile("buildlog", FALSE, ["<--ERR-->", ""])
+      LOG.fatal("process didn't exit normally, check buildlog for more information")
+    }
+    delDir("src/ZUDIR")
+    IF keeplogs.get()
+      writeLinesToFile("buildlog", FALSE, ["<--OK-->", ""])
+    ELSE
+      IO.delete("buildlog")
+    }
+  }
+  # end of added methods
+
+  PROC mkncd(string name, string display_name)
+      dieOnErr(IO.mkdir(name), "error creating " .. display_name)
+      dieOnErr(IO.chdir(name), "error entering " .. display_name)
+  }
+
+  PROC mkSubDirs(string parent, list<string> children)
+    dieOnErr(IO.mkdir(parent), "error creating " .. parent .. " dir")
+
+    FOR sub IN children
+      dieOnErr(IO.mkdir(parent .. "/" .. sub), "error creating " .. sub .. " dir")
+    }
+  }
+
+  PROC writeLinesToFile(string name, bool truncate, list<string> lines)
+    IO.File f = IO.fileWriter(name, truncate)
+    dieOnErr(f.writeAllLines(lines), "error writing " .. name, FALSE)
+    dieOnErr(f.flush(), "error flushing " .. name)
+    f.close()
+  }
+
+  FUNC readFileLines(string name) list<string>
+    IO.File f = IO.fileReader(name)
+    list<string> res = f.readAllLines()
+    dieOnErr(f.flush(), "error flushing " .. name)
+    f.close()
+    RETURN res
+  }
+}
