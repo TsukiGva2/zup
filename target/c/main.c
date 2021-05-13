@@ -1079,8 +1079,6 @@ Y86c *Vcompile = 0;
 Zs11 Yn8O = {"\011keep-logs\000"};
 Zs43 Y2JB = {"\051create a buildlog even if no errors occur\000"};
 Y86c *Vkeeplogs = 0;
-void YJgE(Tc *Aname); /* runLua */
-Zs12 Ytza = {"\012script.lua\000"};
 Zs4 YN2 = {"\002# \000"};
 Zs33 YBvw = {"\037<!--- project's description -->\000"};
 Zs48 YNJR = {"\056# example makefile, it's not a good one though\000"};
@@ -2548,38 +2546,37 @@ Tcpos ZcTbl84899[]={
 Tc Y9QD[]="Main()";
 Tcpos ZcTbl5270[]={
 {30,3},
-{2,3},
-{4,37},
-{10,11},
-{28,11},
-{36,11},
-{42,11},
-{47,9},
-{49,5},
+{2,37},
+{8,11},
+{26,11},
+{34,11},
+{40,11},
+{45,9},
+{47,5},
+{48,5},
 {50,5},
-{52,5},
+{51,5},
 {53,5},
-{55,5},
-{56,7},
+{54,7},
+{55,7},
 {57,7},
-{59,7},
-{62,5},
-{64,23},
-{66,33},
-{68,5},
-{69,5},
-{70,7},
-{71,9},
+{60,5},
+{62,23},
+{64,33},
+{66,5},
+{67,5},
+{68,7},
+{69,9},
+{70,9},
 {72,9},
-{74,9},
-{77,7},
-{78,14},
-{81,14},
-{83,5},
-{84,5},
-{86,18},
-{88,5},
-{92,10},
+{75,7},
+{76,14},
+{79,14},
+{81,5},
+{82,5},
+{84,18},
+{86,5},
+{90,10},
 };
 Tc YUm9[]="Qk.compileProject()";
 Tcpos ZcTbl54187[]={
@@ -2774,10 +2771,6 @@ Tcpos ZcTbl18187[]={
 {10,7},
 {11,16},
 };
-Tc YUKC[]="runLua()";
-Tcpos ZcTbl24612[]={
-{16,4},
-};
 Tcode ZcodeTable[]={
 {0,Y7ma,Yaa,ZcTbl0},
 {412,Y6mX,YxLq,ZcTbl412},
@@ -2806,7 +2799,6 @@ Tcode ZcodeTable[]={
 {19435,Ylon,YCDJ,ZcTbl19435},
 {20149,Y6mX,YFbI,ZcTbl20149},
 {21418,Y6mX,YtpQ,ZcTbl21418},
-{24612,Y7ma,YUKC,ZcTbl24612},
 {24916,Y6mX,Y9iJ,ZcTbl24916},
 {25434,Y6mX,YoIJ,ZcTbl25434},
 {25958,Y6mX,Y4vu,ZcTbl25958},
@@ -9755,24 +9747,6 @@ void YIFb(Tc *Aname, Tb Atruncate, Tl *Alines) {
  return;
 }
 /* Qk done */
-void YJgE(Tc *Aname) {
- Zsf sf;
- sf.prev = topFrame;
- sf.pos = 0;
- topFrame = &sf;
- sf.pos=2461200;
-  lua_State *L = luaL_newstate();
-  luaL_openlibs(L);
-
-  if (luaL_dofile(L,ZgetCstring(Aname)) == LUA_OK)
-  {
-    lua_pop(L, lua_gettop(L));
-  }
-  
-  lua_close(L);
- topFrame = sf.prev;
- return;
-}
 /*
  * INIT IMT
  */
@@ -10154,73 +10128,71 @@ int Fmain(void) {
  topFrame = &sf;
  r = 0;
  sf.pos=527000;
- YJgE(((Tc*)&Ytza));
- sf.pos=527001;
  if ((YPoi(Vnewproject) != NULL))
  {
-  sf.pos=527002;
+  sf.pos=527001;
   Vprojectname = YPoi(Vnewproject);
-  sf.pos=527003;
+  sf.pos=527002;
   VreadmeText = ZnewList((Tt*)&string__T, 4); ZLap((Tl*)VreadmeText, (Tz)(void*)ZcS(((Tc*)&YN2), Vprojectname)); ZLap((Tl*)VreadmeText, (Tz)(void*)((Tc*)&Ya)); ZLap((Tl*)VreadmeText, (Tz)(void*)((Tc*)&YBvw)); ZLap((Tl*)VreadmeText, (Tz)(void*)((Tc*)&Ya));
-  sf.pos=527004;
+  sf.pos=527003;
   VmakefileText = ZnewList((Tt*)&string__T, 16); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YNJR)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YIv_)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YdRa)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YzGt)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YjY5)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YTYB)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Ya)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Y7qh)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YH88)); ZLap((Tl*)VmakefileText, (Tz)(void*)ZcS(((Tc*)&YIC0), Vprojectname)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YTUl)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Ya)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YOGb)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&YH88)); ZLap((Tl*)VmakefileText, (Tz)(void*)ZcS(((Tc*)&Ye1I), Vprojectname)); ZLap((Tl*)VmakefileText, (Tz)(void*)((Tc*)&Ya));
-  sf.pos=527005;
+  sf.pos=527004;
   VhwText = ZnewList((Tt*)&string__T, 6); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&YGsu)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Yxm9)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Y64B)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Yc_G)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Y9a)); ZLap((Tl*)VhwText, (Tz)(void*)((Tc*)&Ya));
-  sf.pos=527006;
+  sf.pos=527005;
   VgitignoreText = ZnewList((Tt*)&string__T, 4); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&Yn0d)); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&YDfk)); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&YLu4)); ZLap((Tl*)VgitignoreText, (Tz)(void*)((Tc*)&Ya));
-  sf.pos=527007;
+  sf.pos=527006;
   VzupconfText = ZnewList((Tt*)&string__T, 2); ZLap((Tl*)VzupconfText, (Tz)(void*)((Tc*)&Ya)); ZLap((Tl*)VzupconfText, (Tz)(void*)((Tc*)&Ya));
-  sf.pos=527008;
+  sf.pos=527007;
   YtlV(Vprojectname, ((Tc*)&YbUX));
-  sf.pos=527009;
+  sf.pos=527008;
   YIFb(((Tc*)&YEE1), 1, VgitignoreText);
-  sf.pos=527010;
+  sf.pos=527009;
   YtlV(((Tc*)&YnET), ((Tc*)&YzwM));
-  sf.pos=527011;
+  sf.pos=527010;
   YIFb((((YHoR(Vismod)) ? (ZcS(Vprojectname, ((Tc*)&YYv4))) : (((Tc*)&YjBi)))), 1, VhwText);
-  sf.pos=527012;
+  sf.pos=527011;
   if (!(YHoR(Vismod)))
   {
-   sf.pos=527013;
+   sf.pos=527012;
    YH56(YHmO(((Tc*)&YEka)), ((Tc*)&YkGo), 1);
-   sf.pos=527014;
+   sf.pos=527013;
    YWhs(((Tc*)&YEXX), (t0 = ZnewList((Tt*)&string__T, 2), ZLap((Tl*)t0, (Tz)(void*)((Tc*)&YtJb)), ZLap((Tl*)t0, (Tz)(void*)((Tc*)&YKa))));
-   sf.pos=527015;
+   sf.pos=527014;
    YIFb(((Tc*)&Yw6s), 1, VmakefileText);
   }
-  sf.pos=527016;
+  sf.pos=527015;
   YIFb(((Tc*)&YRFY), 1, VreadmeText);
  }
  else {
- sf.pos=527017;
+ sf.pos=527016;
  if ((YPoi(Vdelete) != NULL))
  {
-  sf.pos=527018;
+  sf.pos=527017;
   Vprojectname1 = YPoi(Vdelete);
-  sf.pos=527019;
+  sf.pos=527018;
   Yl0k(ZcS3(((Tc*)&YDd3), Vprojectname1, ((Tc*)&YkLa)));
-  sf.pos=527020;
+  sf.pos=527019;
   if ((ZstringCmp(ZstringToLower(ZintAsString(Yk7S())), ((Tc*)&Y5a)) == 0))
   {
-   sf.pos=527021;
+   sf.pos=527020;
    if (YpPE(Vprojectname1))
    {
-    sf.pos=527022;
+    sf.pos=527021;
     YL1c(Vprojectname1);
-    sf.pos=527023;
+    sf.pos=527022;
     Yl0k(((Tc*)&YJYL));
    }
    else
    {
-    sf.pos=527024;
+    sf.pos=527023;
     YFf6(ZcS(Vprojectname1, ((Tc*)&YPes)), NULL, 0);
    }
   }
   else
   {
-   sf.pos=527025;
+   sf.pos=527024;
    Yl0k(((Tc*)&YbrJ));
-   sf.pos=527026;
+   sf.pos=527025;
    r = 0;
    rt = 1;
    goto YMe3;
@@ -10229,23 +10201,23 @@ YMe3:
   if (rt) goto YvK3;
  }
  else {
- sf.pos=527027;
+ sf.pos=527026;
  if (YHoR(Vrun))
  {
-  sf.pos=527028;
+  sf.pos=527027;
   YURC(Vmaxdepth, Vkeeplogs);
-  sf.pos=527029;
+  sf.pos=527028;
   YMso(ZcS(((Tc*)&YDfk), YKFh(YXsa())));
  }
  else {
- sf.pos=527030;
+ sf.pos=527029;
  if (YHoR(Vcompile))
  {
-  sf.pos=527031;
+  sf.pos=527030;
   YURC(Vmaxdepth, Vkeeplogs);
  }
  }}}
- sf.pos=527032;
+ sf.pos=527031;
  r = 0;
 YvK3:
  topFrame = sf.prev;

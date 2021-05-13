@@ -8,7 +8,7 @@ ZUFLAGS=--ccarg "$(CFLAGS)" --ccendarg "$(ENDCFLAGS)"
 
 all:
 	mkdir -p target/bin/
-	cp src/lua_scripts/*.lua .
+	-cp src/lua_scripts/*.lua .
 	$(ZU) $(ZUFLAGS) src/main.zu -o target/bin/zup
 	cp src/ZUDIR/main.c target/c/
 
