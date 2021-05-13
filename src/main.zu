@@ -4,6 +4,7 @@ IMPORT.CHEADER "../lua/lauxlib.h"
 IMPORT "Qk.zu"
 
 ARG.Usage usage       = NEW("Usage: %0% [flags]")
+ARG.String  doc       = NEW(NIL, "doc", NIL, "generate and open documentation for a module")
 ARG.String newproject = NEW("n", "new", NIL, "create a new project")
 ARG.Bool ismod        = NEW("m", "module", FALSE, "set this flag if project is a module")
 ARG.Bool run          = NEW("r", "run", FALSE, "compile and run a project")
@@ -27,6 +28,11 @@ PROC runLua(string name)
 }
 
 FUNC Main() int
+  IF ARG.rawSize() < 1
+    IO.print(usage.get())
+    RETURN 1
+  }
+
   IF newproject.get() != NIL
   
     string projectname = newproject.get()
@@ -115,6 +121,42 @@ FUNC Main() int
 
     Qk.compileProject(maxdepth, keeplogs)
 
+  ELSEIF doc.get() != NIL
+    
+    IF doc.get().slice(-3) != ".zu"
+      LOG.fatal("filename must end in .zu")
+    }
+
+    IF !IO.isReadable(doc.get())
+      LOG.fatal("file not readable or not found " .. doc.get())
+    }
+
+    int matches = 0
+
+    FOR line IN Qk.readFileLines(doc.get())
+      IF line.find("MODULE") != -1
+        matches++
+      }
+    }
+
+    IF matches < 1
+      LOG.fatal("file is not a module")
+    }
+
+    string dirname = IO.tail(doc.get()).slice(0, -4)
+
+    Qk.dieOnErr(IO.mkdir(dirname), "error creating creating module dir")
+
+    IF SYS.shell("zudocu " .. doc.get() .. " " .. dirname) != 0
+      IO.print("error building documentation, see error message above")
+    }
+
+    Qk.dieOnErr(SYS.openInBrowser("file://" .. IO.getdir() .. "/" .. dirname .. "/index.html"), "error opening browser")
+
+    IO.stdout.write("shall i delete the output directory? [Y/n]: ")
+    IF IO.stdin.readChar() != 'n'
+      Qk.delDir(dirname)
+    }
   }
 
   RETURN 0

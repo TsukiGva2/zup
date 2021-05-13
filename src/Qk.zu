@@ -90,4 +90,12 @@ MODULE Qk @items=public
     f.close()
     RETURN res
   }
+  
+  FUNC readFile(string name) string
+    IO.File f = IO.fileReader(name)
+    string res = f.readAll()
+    dieOnErr(f.flush(), "error flushing " .. name)
+    f.close()
+    RETURN res
+  }
 }
