@@ -2,6 +2,7 @@
 ZU=zimbu
 CC=gcc
 #CC=clang
+ENDCFLAGS=-llua -lm -ldl -L./lua/ -I./lua/
 CFLAGS=
 ZUFLAGS=--ccendarg "-llua -lm -ldl -L./lua/ -I./lua/"
 
@@ -13,5 +14,5 @@ all:
 
 c:
 	mkdir -p target/bin/
-	$(CC) $(CFLAGS) target/c/main.c -o target/bin/zup
+	$(CC) $(CFLAGS) target/c/main.c -o target/bin/zup $(ENDCFLAGS)
 
