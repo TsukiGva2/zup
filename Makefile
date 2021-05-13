@@ -4,7 +4,7 @@ CC=gcc
 #CC=clang
 ENDCFLAGS=-llua -lm -ldl -L./lua/ -I./lua/
 CFLAGS=
-ZUFLAGS=--ccendarg "-llua -lm -ldl -L./lua/ -I./lua/"
+ZUFLAGS=--ccarg "$(CFLAGS)" --ccendarg "$(ENDCFLAGS)"
 
 all:
 	mkdir -p target/bin/
